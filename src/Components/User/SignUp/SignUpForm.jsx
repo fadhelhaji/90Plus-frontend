@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router"; // ✅ correct import
+import { useNavigate } from "react-router";
 import * as authService from "../../../services/authService";
-import { UserContext } from "../../Contexts/UserContext";
+import { UserContext } from "../../../Contexts/UserContext";
 
 function SignUpForm() {
   const navigate = useNavigate();
@@ -23,7 +23,6 @@ function SignUpForm() {
     event.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
       return;
     }
 
@@ -37,8 +36,7 @@ function SignUpForm() {
       // 3️⃣ Navigate after context is set
       navigate("/");
     } catch (error) {
-      console.error("Signup failed:", error);
-      alert(error.response?.data?.message || "Signup failed");
+      console.log("Signup failed:", error);
     }
   }
 
@@ -48,10 +46,15 @@ function SignUpForm() {
     formData.password !== formData.confirmPassword;
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Create Account</h2>
+<div className="min-h-screen flex justify-center items-center bg-gray-100">
+  <form
+    onSubmit={handleSubmit}
+    className="bg-white p-6 shadow-md w-full max-w-md flex flex-col gap-4 rounded-3xl"
+  >
+    <h2 className="text-2xl font-bold text-center mb-4">Create Account</h2>
 
-      <label htmlFor="username">Username</label>
+    <label className="flex flex-col">
+      Username
       <input
         id="username"
         name="username"
@@ -60,9 +63,12 @@ function SignUpForm() {
         type="text"
         placeholder="Username"
         required
+        className="mt-1 p-2 border border-gray-300 rounded-xl"
       />
+    </label>
 
-      <label htmlFor="password">Password</label>
+    <label className="flex flex-col">
+      Password
       <input
         id="password"
         name="password"
@@ -71,9 +77,12 @@ function SignUpForm() {
         type="password"
         placeholder="Password"
         required
+        className="mt-1 p-2 border border-gray-300 rounded-xl"
       />
+    </label>
 
-      <label htmlFor="confirmPassword">Confirm Password</label>
+    <label className="flex flex-col">
+      Confirm Password
       <input
         id="confirmPassword"
         name="confirmPassword"
@@ -82,16 +91,28 @@ function SignUpForm() {
         type="password"
         placeholder="Confirm Password"
         required
+        className="mt-1 p-2 border border-gray-300 rounded-xl"
       />
+    </label>
 
-      <button type="submit" disabled={isFormInvalid}>
-        Create Account
-      </button>
+    <button
+      type="submit"
+      disabled={isFormInvalid}
+      className={`w-full py-2 rounded-lg transition-colors ${isFormInvalid ? "bg-gray-400 cursor-not-allowed" : "bg-green-600 hover:bg-green-700 text-white"}`}
+    >
+      Create Account
+    </button>
 
-      <button type="button" onClick={() => navigate("/auth/sign-in")}>
-        Sign In Instead
-      </button>
-    </form>
+    <button
+      type="button"
+      onClick={() => navigate("/auth/sign-in")}
+      className="w-full bg-blue-600 py-2 rounded-lg hover:bg-blue-700 text-white transition-colors"
+    >
+      Sign In Instead
+    </button>
+  </form>
+</div>
+
   );
 }
 

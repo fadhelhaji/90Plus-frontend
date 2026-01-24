@@ -23,46 +23,75 @@ const SignInForm = () => {
       const signedInUser = await signIn(formData);
       setUser(signedInUser);
       navigate("/");
-    } catch (err) {
-      setMessage(err.message);
+    } catch (error) {
+      setMessage(error.message);
     }
   };
 
+  const isFormInvalid = !formData.username || !formData.password;
+
   return (
-    <form autoComplete="off" onSubmit={handleSubmit}>
-      <h2>Sign In</h2>
-
-      {message && <p>{message}</p>}
-
-      <label htmlFor="username">Username</label>
-      <input
-        type="text"
-        id="username"
-        name="username"
-        value={formData.username}
-        onChange={handleChange}
+    <div className="min-h-screen flex justify-center items-center bg-gray-100">
+      <form
+        onSubmit={handleSubmit}
         autoComplete="off"
-        placeholder="Username"
-        required
-      />
+        className="bg-white p-6 shadow-md w-full max-w-md flex flex-col gap-4 rounded-3xl"
+      >
+        <h2 className="text-2xl font-bold text-center mb-4">Sign In</h2>
 
-      <label htmlFor="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        value={formData.password}
-        onChange={handleChange}
-        autoComplete="off"
-        placeholder="Password"
-        required
-      />
+        {message && (
+          <p className="text-red-500 text-center">{message}</p>
+        )}
 
-      <button type="submit">Sign In</button>
-      <button type="button" onClick={() => navigate("/")}>
-        Cancel
-      </button>
-    </form>
+        <label className="flex flex-col">
+          Username
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            placeholder="Username"
+            required
+            className="mt-1 p-2 border border-gray-300 rounded-xl"
+          />
+        </label>
+
+        <label className="flex flex-col">
+          Password
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Password"
+            required
+            className="mt-1 p-2 border border-gray-300 rounded-xl"
+          />
+        </label>
+
+        <button
+          type="submit"
+          disabled={isFormInvalid}
+          className={`w-full py-2 rounded-lg transition-colors ${
+            isFormInvalid
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-green-600 hover:bg-green-700 text-white"
+          }`}
+        >
+          Sign In
+        </button>
+
+        <button
+          type="button"
+          onClick={() => navigate("/")}
+          className="w-full bg-blue-600 py-2 rounded-lg hover:bg-blue-700 text-white transition-colors"
+        >
+          Cancel
+        </button>
+      </form>
+    </div>
   );
 };
 
