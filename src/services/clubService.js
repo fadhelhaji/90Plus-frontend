@@ -42,4 +42,18 @@ async function show(id) {
   }
 }
 
-export { create, index, show };
+// Create team for club
+async function createTeam(clubId, formData) {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/${clubId}/teams/create`,
+      formData,
+      getAuthHeader(),
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export { create, createTeam, index, show };
