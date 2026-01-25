@@ -6,6 +6,7 @@ import ClubList from "./Components/Club/ClubList";
 import Home from "./Components/Home/Home";
 import Landing from "./Components/Landing/Landing";
 import Navbar from "./Components/Navbar/Navbar";
+import TeamForm from "./Components/Team/TeamForm";
 import SignInForm from "./Components/User/SignIn/SignInForm";
 import SignUpForm from "./Components/User/SignUp/SignUpForm";
 import { UserContext } from "./Contexts/UserContext";
@@ -23,6 +24,7 @@ function App() {
         <Route path="/club/create" element={<ClubForm />} />
         <Route path="/club" element={<ClubList />} />
         <Route path="/club/:id" element={<ClubDetails />} />
+        <Route path="/club/:id/teams/create" element={<TeamForm />} />
       </Routes>
     </>
   );
