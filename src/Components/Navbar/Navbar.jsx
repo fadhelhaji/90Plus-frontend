@@ -18,16 +18,16 @@ const Navbar = () => {
   return (
     <nav>
       <div className="flex justify-center">
-      <div>90Plus</div>
+        <div>90Plus</div>
 
-      {/* NOT LOGGED IN */}
-      {!user && path === "/" && (
-        <div>
-          <Link to="/auth/sign-up">Sign Up</Link>
-          <Link to="/auth/sign-in">Sign In</Link>
-        </div>
-      )}
-      </div>  
+        {/* NOT LOGGED IN */}
+        {!user && path === "/" && (
+          <div>
+            <Link to="/auth/sign-up">Sign Up</Link>
+            <Link to="/auth/sign-in">Sign In</Link>
+          </div>
+        )}
+      </div>
 
       {/* LOGGED IN */}
       {user && (
@@ -37,7 +37,8 @@ const Navbar = () => {
           {/* Links depending on page */}
           {path === "/home" && (
             <>
-
+              <Link to="/club">My Club</Link>
+              <Link to="/club/create">Create Club</Link>
             </>
           )}
           <button onClick={handleSignOut}>Sign Out</button>

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
-import { signIn } from "../../../services/authService";
 import { UserContext } from "../../../Contexts/UserContext";
+import { signIn } from "../../../services/authService";
 
 const SignInForm = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const SignInForm = () => {
     try {
       const signedInUser = await signIn(formData);
       setUser(signedInUser);
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       setMessage(error.message);
     }
@@ -39,9 +39,7 @@ const SignInForm = () => {
       >
         <h2 className="text-2xl font-bold text-center mb-4">Sign In</h2>
 
-        {message && (
-          <p className="text-red-500 text-center">{message}</p>
-        )}
+        {message && <p className="text-red-500 text-center">{message}</p>}
 
         <label className="flex flex-col">
           Username
