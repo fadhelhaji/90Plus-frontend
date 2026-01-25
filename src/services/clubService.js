@@ -33,9 +33,9 @@ async function index() {
 }
 
 // Show
-async function show(id) {
+async function show(clubId) {
   try {
-    const response = await axios.get(`${BASE_URL}/${id}`, getAuthHeader());
+    const response = await axios.get(`${BASE_URL}/${clubId}`, getAuthHeader());
     return response.data;
   } catch (error) {
     console.log(error);
@@ -56,4 +56,28 @@ async function createTeam(clubId, formData) {
   }
 }
 
-export { create, createTeam, index, show };
+// Index team for club
+async function indexTeam(clubId) {
+  try {
+    const response = await axios.get(`${BASE_URL}/${clubId}`, getAuthHeader());
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Show team details
+async function showTeam(clubId, teamId) {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/${clubId}/teams/${teamId}`,
+      getAuthHeader(),
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export { create, createTeam, index, indexTeam, show, showTeam };
