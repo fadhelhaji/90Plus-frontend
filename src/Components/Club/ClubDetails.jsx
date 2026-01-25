@@ -30,6 +30,7 @@ function ClubDetails() {
     <div>
       <h1>{club.club_name}</h1>
       <p>Coach: {club.coach_id?.username}</p>
+      <p>Created at: {new Date(club.created_at).toLocaleDateString()}</p>
     </div>
   );
 }
