@@ -1,8 +1,8 @@
+import { Link } from "react-router";
+
 function Landing() {
   return (
-  <div
-  className="relative min-h-screen bg-cover bg-center overflow-hidden">
-
+    <div className="relative min-h-screen bg-cover bg-center overflow-hidden">
       {/* Decorative circles */}
       {/* <div className="absolute -left-32 bottom-10 w-72 h-72 bg-blue-900/30 rounded-full hidden lg:block" />
       <div className="absolute right-10 -top-40 w-72 h-72 bg-blue-900/30 rounded-full hidden lg:block" /> */}
@@ -48,11 +48,11 @@ function Landing() {
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
             <button className="bg-blue-500 text-neutral-900 px-10 py-4 rounded-full font-semibold tracking-wide hover:scale-105 transition">
-              Download App
+              <Link to="/auth/sign-up">Sign Up</Link>
             </button>
 
             <button className="bg-white text-blue-900 px-10 py-4 rounded-full font-semibold tracking-wide hover:scale-105 transition">
-              Download App
+              <Link to="/auth/sign-in">Sign In</Link>
             </button>
           </div>
         </div>

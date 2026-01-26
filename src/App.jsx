@@ -5,6 +5,7 @@ import ClubForm from "./Components/Club/ClubForm";
 import ClubList from "./Components/Club/ClubList";
 import Home from "./Components/Home/Home";
 import Landing from "./Components/Landing/Landing";
+import Navbar from "./Components/Navbar/Navbar";
 import TeamDetails from "./Components/Team/TeamDetails";
 import TeamForm from "./Components/Team/TeamForm";
 import SignInForm from "./Components/User/SignIn/SignInForm";
@@ -15,7 +16,7 @@ function App() {
   const { user } = useContext(UserContext);
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Landing />} />
