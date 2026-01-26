@@ -16,7 +16,7 @@ function App() {
   const { user } = useContext(UserContext);
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Landing />} />
