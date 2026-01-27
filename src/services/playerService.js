@@ -19,4 +19,14 @@ async function index() {
   }
 }
 
-export { index };
+// Show
+async function show(id) {
+  try {
+    const response = await axios.get(`${BASE_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export { index, show };

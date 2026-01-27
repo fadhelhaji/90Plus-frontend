@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router";
 import * as playerService from "../../services/playerService";
 function PlayersList() {
   const [players, setPlayers] = useState(null);
+  const { id } = useParams();
 
   async function fetchPlayers() {
     try {
@@ -23,7 +25,9 @@ function PlayersList() {
     <>
       {players.map((p) => (
         <>
-          <p>{p.username}</p>
+          <Link key={p._id} to={`/players/${p._id}`}>
+            <p>{p.username}</p>
+          </Link>
         </>
       ))}
     </>
