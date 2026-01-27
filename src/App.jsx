@@ -6,6 +6,7 @@ import ClubList from "./Components/Club/ClubList";
 import Home from "./Components/Home/Home";
 import Landing from "./Components/Landing/Landing";
 import Navbar from "./Components/Navbar/Navbar";
+import PlayerInvites from "./Components/Players/PlayerInvites";
 import PlayersDetails from "./Components/Players/PlayersDetails";
 import PlayersList from "./Components/Players/PlayersList";
 import TeamDetails from "./Components/Team/TeamDetails";
@@ -31,6 +32,7 @@ function App() {
         <Route path="/club/:clubId/teams/:teamId" element={<TeamDetails />} />
         <Route path="/players/market" element={<PlayersList />} />
         <Route path="/players/:id" element={<PlayersDetails />} />
+        <Route path="/players/invites/:playerId" element={<PlayerInvites />} />
       </Routes>
     </>
   );

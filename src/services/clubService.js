@@ -80,4 +80,13 @@ async function showTeam(clubId, teamId) {
   }
 }
 
-export { create, createTeam, index, indexTeam, show, showTeam };
+async function invitePlayer(clubId, playerId) {
+  const response = await axios.post(
+    `${BASE_URL}/${clubId}/invite/${playerId}`,
+    {},
+    getAuthHeader(),
+  );
+  return response.data;
+}
+
+export { create, createTeam, index, indexTeam, invitePlayer, show, showTeam };

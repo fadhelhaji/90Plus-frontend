@@ -29,4 +29,15 @@ async function show(id) {
   }
 }
 
-export { index, show };
+async function getInvitations(playerId) {
+  try {
+    const response = await axios.get(`${BASE_URL}/invites/${playerId}`);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export { getInvitations, index, show };

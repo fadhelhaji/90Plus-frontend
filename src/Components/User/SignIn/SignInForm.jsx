@@ -83,7 +83,7 @@ const SignInForm = () => {
 
         <button
           type="button"
-          onClick={() => navigate("/home")}
+          onClick={() => navigate("/")}
           className="w-full bg-blue-600 py-2 rounded-lg hover:bg-blue-700 text-white transition-colors"
         >
           Cancel
