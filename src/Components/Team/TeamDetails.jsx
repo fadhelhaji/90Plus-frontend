@@ -12,8 +12,8 @@ function TeamDetails() {
       try {
         const data = await clubService.showTeam(clubId, teamId);
         setTeam(data);
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        console.log(err);
       } finally {
         setLoading(false);
       }

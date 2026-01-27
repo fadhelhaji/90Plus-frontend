@@ -6,6 +6,7 @@ import ClubList from "./Components/Club/ClubList";
 import Home from "./Components/Home/Home";
 import Landing from "./Components/Landing/Landing";
 import Navbar from "./Components/Navbar/Navbar";
+import PlayersList from "./Components/Players/PlayersList";
 import TeamDetails from "./Components/Team/TeamDetails";
 import TeamForm from "./Components/Team/TeamForm";
 import SignInForm from "./Components/User/SignIn/SignInForm";
@@ -16,7 +17,7 @@ function App() {
   const { user } = useContext(UserContext);
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Landing />} />
@@ -27,6 +28,7 @@ function App() {
         <Route path="/club/:id" element={<ClubDetails />} />
         <Route path="/club/:id/teams/create" element={<TeamForm />} />
         <Route path="/club/:clubId/teams/:teamId" element={<TeamDetails />} />
+        <Route path="/players/market" element={<PlayersList />} />
       </Routes>
     </>
   );

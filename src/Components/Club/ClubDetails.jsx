@@ -45,11 +45,11 @@ function ClubDetails() {
 
   return (
     <div>
-      <h1>{club.club_name}</h1>
+      <h1> Club Name: {club.club_name}</h1>
       {team.map((team) => (
         <div key={team._id}>
           <Link to={`/club/${club._id}/teams/${team._id}`}>
-            {team.team_name}
+            <p>Team Name: {team.team_name}</p>
           </Link>
         </div>
       ))}

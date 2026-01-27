@@ -15,36 +15,28 @@ const Navbar = () => {
     navigate("/");
   };
 
-  const isCoach = user.role === "Coach";
+  // const isCoach = user.role === "Coach";
   const { id } = useParams();
 
   return (
-    <nav>
-      <div className="flex justify-center gap-10">
-        <div>90Plus</div>
-
-        {/* NOT LOGGED IN */}
-        {!isCoach && !user && path === "/" && (
-          <div>
-            <Link to="/auth/sign-up">Sign Up</Link>
-            <Link to="/auth/sign-in">Sign In</Link>
+    <>
+      <div className="w-full h-full p-2.5 inline-flex flex-col justify-start items-center gap-72 overflow-hidden">
+        <div className="self-stretch px-2.5 py-[5px] bg-white rounded-[5px] inline-flex justify-between items-center">
+          <img className="w-36 h-12" src="https://placehold.co/150x48" />
+          <div className="flex justify-end items-center gap-4">
+            {user && (
+              <Link to="/" onClick={handleSignOut}>
+                <div className="p-2.5 flex justify-center items-center gap-2.5">
+                  <div className="justify-start text-Grays-Black text-3xl font-normal font-['Jersey_25']">
+                    Sign Out
+                  </div>
+                </div>
+              </Link>
+            )}
           </div>
-        )}
-        {isCoach && path === "/home" && (
-          <div>
-            <Link to="/club">My Club</Link>
-            <Link onSubmit={handleSignOut} to="/">
-              Sign Out
-            </Link>
-          </div>
-        )}
-        {isCoach && path === "/club" && (
-          <div>
-            <Link to="/home">Home</Link>
-          </div>
-        )}
+        </div>
       </div>
-    </nav>
+    </>
   );
 };
 

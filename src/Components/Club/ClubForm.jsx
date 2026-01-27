@@ -15,6 +15,7 @@ function ClubForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     await clubService.create(formData);
+    navigate("/club");
   }
   return (
     <>

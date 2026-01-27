@@ -28,7 +28,7 @@ function ClubList() {
         {club.length > 0 ? (
           club.map((club) => (
             <Link key={club._id} to={`/club/${club._id}`}>
-              <p>{club.club_name}</p>
+              <p>Club Name: {club.club_name}</p>
             </Link>
           ))
         ) : (

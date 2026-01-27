@@ -35,7 +35,7 @@ function SignUpForm() {
       setUser(user);
 
       // 3️⃣ Navigate after context is set
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       console.log("Signup failed:", error);
     }
