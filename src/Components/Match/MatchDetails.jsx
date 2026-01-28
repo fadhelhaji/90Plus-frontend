@@ -188,7 +188,8 @@ function MatchDetails() {
     setSavingRatings(true);
     try {
       const entries = Object.entries(ratingsDraft).filter(
-        ([, rating]) => rating !== "" && rating !== null && rating !== undefined
+        ([, rating]) =>
+          rating !== "" && rating !== null && rating !== undefined,
       );
 
       for (const [playerId, rating] of entries) {
@@ -281,7 +282,9 @@ function MatchDetails() {
     setPhotoTagsDraft((prev) => {
       const current = Array.isArray(prev[photoId]) ? prev[photoId] : [];
       const exists = current.includes(playerId);
-      const next = exists ? current.filter((x) => x !== playerId) : [...current, playerId];
+      const next = exists
+        ? current.filter((x) => x !== playerId)
+        : [...current, playerId];
       return { ...prev, [photoId]: next };
     });
   }
@@ -289,7 +292,9 @@ function MatchDetails() {
   async function handleSavePhotoTags(photoId) {
     setSavingTagsPhotoId(photoId);
     try {
-      const ids = Array.isArray(photoTagsDraft[photoId]) ? photoTagsDraft[photoId] : [];
+      const ids = Array.isArray(photoTagsDraft[photoId])
+        ? photoTagsDraft[photoId]
+        : [];
       await gameService.updatePhotoTags(clubId, gameId, photoId, ids);
       await fetchAll();
     } catch (err) {
@@ -378,7 +383,9 @@ function MatchDetails() {
               />
             </div>
 
-            <div className="text-center text-white/80 font-semibold text-xl">—</div>
+            <div className="text-center text-white/80 font-semibold text-xl">
+              —
+            </div>
 
             <div className="space-y-2">
               <label className="text-white/80 text-sm">{titleB}</label>
@@ -432,7 +439,7 @@ function MatchDetails() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {allPlayers.map((p) => {
                 const saved = statsByPlayerId[p.id]?.rating;
-                const draft = ratingsDraft[p.id] ?? (saved ?? "");
+                const draft = ratingsDraft[p.id] ?? saved ?? "";
                 const displayName = p.username || "Unknown";
                 const position = p.position || "—";
                 const teamLabel = p.team === "A" ? titleA : titleB;
@@ -548,12 +555,17 @@ function MatchDetails() {
                   />
                   <div className="p-3">
                     <div className="text-white/70 text-sm">
-                      {p.uploaded_at ? new Date(p.uploaded_at).toLocaleString() : ""}
+                      {p.uploaded_at
+                        ? new Date(p.uploaded_at).toLocaleString()
+                        : ""}
                     </div>
                     <div className="mt-2 flex items-center gap-2 text-white/60 text-sm">
                       <Tag className="w-4 h-4" />
                       <span>
-                        {(Array.isArray(p.tagged_player_ids) ? p.tagged_player_ids.length : 0) || 0} tagged
+                        {(Array.isArray(p.tagged_player_ids)
+                          ? p.tagged_player_ids.length
+                          : 0) || 0}{" "}
+                        tagged
                       </span>
                     </div>
                   </div>
@@ -580,7 +592,9 @@ function MatchDetails() {
                     className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg flex items-center gap-2 disabled:opacity-50"
                   >
                     <Trash2 className="w-4 h-4" />
-                    {deletingPhotoId === activePhoto._id ? "Deleting..." : "Delete"}
+                    {deletingPhotoId === activePhoto._id
+                      ? "Deleting..."
+                      : "Delete"}
                   </button>
                 )}
 
@@ -625,8 +639,12 @@ function MatchDetails() {
               <div className="p-5 border-t lg:border-t-0 lg:border-l border-white/10">
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-white font-semibold text-lg">Tag Players</div>
-                    <div className="text-white/60 text-sm">Select players to tag in this photo</div>
+                    <div className="text-white font-semibold text-lg">
+                      Tag Players
+                    </div>
+                    <div className="text-white/60 text-sm">
+                      Select players to tag in this photo
+                    </div>
                   </div>
 
                   {activePhoto?._id && (
@@ -636,14 +654,18 @@ function MatchDetails() {
                       className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 disabled:opacity-50"
                     >
                       <Save className="w-4 h-4" />
-                      {savingTagsPhotoId === activePhoto._id ? "Saving..." : "Save"}
+                      {savingTagsPhotoId === activePhoto._id
+                        ? "Saving..."
+                        : "Save"}
                     </button>
                   )}
                 </div>
 
                 <div className="mt-4 space-y-2 max-h-[52vh] overflow-auto pr-2">
                   {allPlayers.length === 0 ? (
-                    <div className="text-white/60 text-sm">No players available to tag.</div>
+                    <div className="text-white/60 text-sm">
+                      No players available to tag.
+                    </div>
                   ) : (
                     allPlayers.map((pl) => {
                       const pid = pl.id;
@@ -656,13 +678,19 @@ function MatchDetails() {
                         <label
                           key={pid}
                           className={`flex items-center justify-between gap-3 p-3 rounded-lg border ${
-                            selected ? "border-blue-500/40 bg-blue-500/10" : "border-white/10 bg-white/5"
+                            selected
+                              ? "border-blue-500/40 bg-blue-500/10"
+                              : "border-white/10 bg-white/5"
                           } cursor-pointer`}
                         >
                           <div className="text-white">
-                            <div className="font-semibold">{pl.username || "Unknown"}</div>
+                            <div className="font-semibold">
+                              {pl.username || "Unknown"}
+                            </div>
                             <div className="text-white/60 text-sm">
-                              {(pl.team === "A" ? titleA : titleB) + " • " + (pl.position || "—")}
+                              {(pl.team === "A" ? titleA : titleB) +
+                                " • " +
+                                (pl.position || "—")}
                             </div>
                           </div>
 

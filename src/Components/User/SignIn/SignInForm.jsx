@@ -24,7 +24,7 @@ const SignInForm = () => {
       setUser(signedInUser);
       navigate("/home");
     } catch (error) {
-      setMessage(error.message);
+      setMessage("Invalid username or password.");
     }
   };
 

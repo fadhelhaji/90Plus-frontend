@@ -1,59 +1,133 @@
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
+import {
+  Shield,
+  Users,
+  Trophy,
+  Calendar,
+  TrendingUp,
+  Star,
+  Target,
+  Award,
+} from "lucide-react";
 
 function Landing() {
+  const navigate = useNavigate();
+
   return (
-    <div className="relative min-h-screen bg-cover bg-center overflow-hidden">
-      {/* Decorative circles */}
-      {/* <div className="absolute -left-32 bottom-10 w-72 h-72 bg-blue-900/30 rounded-full hidden lg:block" />
-      <div className="absolute right-10 -top-40 w-72 h-72 bg-blue-900/30 rounded-full hidden lg:block" /> */}
+    <div className="h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex flex-col">
+      {/* Hero Section */}
+      <div className="flex-1 flex items-center justify-center px-4 sm:px-6 py-6 sm:py-8">
+        <div className="max-w-6xl mx-auto w-full">
+          <div className="text-center mb-6 sm:mb-8">
+            {/* Logo/Icon */}
+            <div className="flex justify-center mb-3 sm:mb-4">
+              <div className="bg-gradient-to-br from-green-500 to-blue-600 p-3 sm:p-4 rounded-full shadow-2xl transform hover:scale-110 transition-transform">
+                <Shield className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 text-white" />
+              </div>
+            </div>
 
-      {/* Navbar */}
-      <div className="bg-blue-500 absolute top-6 left-6 right-6 flex justify-between items-center z-10">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-black" />
-          <span className="text-black text-xl font-semibold tracking-widest">
-            FootGame
-          </span>
-        </div>
+            {/* Main Heading */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-2 sm:mb-3 bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+              90Plus
+            </h1>
 
-        <div className="hidden md:flex gap-8 text-black text-lg font-semibold tracking-wide">
-          <span>News</span>
-          <span>Live scores</span>
-          <span>Leagues & Cups</span>
-          <span>Teams</span>
-        </div>
-      </div>
+            {/* Subheading */}
+            <p className="text-base sm:text-lg md:text-xl text-white/80 mb-4 sm:mb-6 max-w-2xl mx-auto px-4">
+              Build your dream club. Scout elite players. Dominate the pitch.
+            </p>
 
-      {/* Main Content */}
-      <div className="mx-auto max-w-7xl px-6 pt-55 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        {/* Left Image Section */}
-        <div className="relative flex justify-center">
-          <img
-            src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9vdGJhbGx8ZW58MHx8MHx8fDA%3D"
-            alt="App Preview"
-            className="w-full max-w-sm lg:max-w-md object-contain rounded-4xl"
-          />
-        </div>
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+              <button
+                onClick={() => navigate("/auth/sign-up")}
+                className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl text-sm sm:text-base shadow-2xl transform hover:scale-105 transition-all w-full sm:w-auto"
+              >
+                Start Your Journey
+              </button>
+              <button
+                onClick={() => navigate("/auth/sign-in")}
+                className="bg-white/10 hover:bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl text-sm sm:text-base shadow-xl transform hover:scale-105 transition-all w-full sm:w-auto"
+              >
+                Sign In
+              </button>
+            </div>
+          </div>
 
-        {/* Right Text Section */}
-        <div className="text-center lg:text-left text-black space-y-8">
-          <h1 className="text-3xl lg:text-5xl font-bold tracking-widest leading-tight">
-            Get Football Updates
-          </h1>
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-6">
+            {/* Feature 1 */}
+            <div className="bg-gradient-to-br from-blue-600/20 to-blue-800/20 backdrop-blur-sm border border-blue-400/30 rounded-xl p-3 sm:p-4 hover:scale-105 transition-transform">
+              <div className="bg-blue-600 p-2 rounded-lg w-fit mb-2">
+                <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              </div>
+              <h3 className="text-white text-sm sm:text-base mb-1">
+                Create Your Club
+              </h3>
+              <p className="text-white/70 text-xs sm:text-sm">
+                Build and manage your football empire
+              </p>
+            </div>
 
-          <p className="text-lg lg:text-2xl tracking-wide leading-relaxed text-black">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-            habitasse fermentum, elementum.
-          </p>
+            {/* Feature 2 */}
+            <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 backdrop-blur-sm border border-purple-400/30 rounded-xl p-3 sm:p-4 hover:scale-105 transition-transform">
+              <div className="bg-purple-600 p-2 rounded-lg w-fit mb-2">
+                <Users className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              </div>
+              <h3 className="text-white text-sm sm:text-base mb-1">
+                Scout Players
+              </h3>
+              <p className="text-white/70 text-xs sm:text-sm">
+                Discover and recruit top talent
+              </p>
+            </div>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
-            <button className="bg-blue-500 text-neutral-900 px-10 py-4 rounded-full font-semibold tracking-wide hover:scale-105 transition">
-              <Link to="/auth/sign-up">Sign Up</Link>
-            </button>
+            {/* Feature 3 */}
+            <div className="bg-gradient-to-br from-orange-600/20 to-red-800/20 backdrop-blur-sm border border-orange-400/30 rounded-xl p-3 sm:p-4 hover:scale-105 transition-transform">
+              <div className="bg-orange-600 p-2 rounded-lg w-fit mb-2">
+                <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              </div>
+              <h3 className="text-white text-sm sm:text-base mb-1">
+                Schedule Matches
+              </h3>
+              <p className="text-white/70 text-xs sm:text-sm">
+                Organize and track your games
+              </p>
+            </div>
 
-            <button className="bg-white text-blue-900 px-10 py-4 rounded-full font-semibold tracking-wide hover:scale-105 transition">
-              <Link to="/auth/sign-in">Sign In</Link>
-            </button>
+            {/* Feature 4 */}
+            <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 backdrop-blur-sm border border-green-400/30 rounded-xl p-3 sm:p-4 hover:scale-105 transition-transform">
+              <div className="bg-green-600 p-2 rounded-lg w-fit mb-2">
+                <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              </div>
+              <h3 className="text-white text-sm sm:text-base mb-1">
+                Build Teams
+              </h3>
+              <p className="text-white/70 text-xs sm:text-sm">
+                Create winning formations
+              </p>
+            </div>
+          </div>
+
+          {/* Feature Pills */}
+          <div className="flex flex-wrap items-center justify-center gap-2 px-4">
+            <div className="bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 rounded-full flex items-center gap-1.5">
+              <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" />
+              <span className="text-white/90 text-xs sm:text-sm">
+                Player Ratings
+              </span>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 rounded-full flex items-center gap-1.5">
+              <Target className="w-3 h-3 sm:w-4 sm:h-4 text-red-400" />
+              <span className="text-white/90 text-xs sm:text-sm">
+                Formation Editor
+              </span>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 rounded-full flex items-center gap-1.5">
+              <Award className="w-3 h-3 sm:w-4 sm:h-4 text-purple-400" />
+              <span className="text-white/90 text-xs sm:text-sm">
+                Match Analytics
+              </span>
+            </div>
           </div>
         </div>
       </div>

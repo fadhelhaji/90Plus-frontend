@@ -1,6 +1,14 @@
-import { Calendar, Plus, Shield, Trophy, User, Users } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
+import {
+  Shield,
+  User,
+  Users,
+  Trophy,
+  Calendar,
+  Plus,
+  ArrowLeft,
+} from "lucide-react";
 import * as clubService from "../../services/clubService";
 import { PlayerCard } from "./UI/PlayerCard";
 import { TeamCard } from "./UI/TeamCard";
@@ -8,73 +16,77 @@ import { TeamCard } from "./UI/TeamCard";
 function ClubDetails() {
   const { id: clubId } = useParams();
   const navigate = useNavigate();
-
   const [club, setClub] = useState(null);
   const [team, setTeam] = useState([]);
-  const [clubPlayers, setClubPlayers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   async function fetchClubDetails() {
     try {
-      const data = await clubService.show(clubId);
-      setClub(data.club);
-      setClubPlayers(data.clubPlayers || []);
+      const res = await clubService.show(clubId);
+      const payload = res?.data ? res.data : res;
+
+      setClub(payload?.club || payload || null);
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
+      setClub(null);
     }
   }
 
   async function fetchTeams() {
     try {
-      const data = await clubService.indexTeam(clubId);
-      setTeam(data.teams);
+      const res = await clubService.indexTeam(clubId);
+      const payload = res?.data ? res.data : res;
+
+      setTeam(payload?.teams || []);
     } catch (error) {
       console.log(error);
+      setTeam([]);
     }
   }
 
   useEffect(() => {
-    fetchClubDetails();
-    fetchTeams();
+    (async () => {
+      setLoading(true);
+      await Promise.all([fetchClubDetails(), fetchTeams()]);
+      setLoading(false);
+    })();
   }, [clubId]);
 
   const goToTeamForm = () => {
-    navigate(`/club/${club._id}/teams/create`);
-  };
-
-  const goToCreateMatch = () => {
-    navigate(`/club/${club._id}/games/create`);
+    navigate(`/club/${clubId}/teams/create`);
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-        <div className="text-white text-xl">Loading club details...</div>
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
+        <div className="text-white text-lg sm:text-xl">
+          Loading club details...
+        </div>
       </div>
     );
   }
 
   if (!club) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-        <div className="text-white text-xl">Club not found</div>
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
+        <div className="text-white text-lg sm:text-xl">Club not found</div>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      <div className="bg-gradient-to-r from-red-600 to-blue-900 text-white py-12 px-6 shadow-2xl">
+      <div className="bg-gradient-to-r from-red-600 to-blue-900 text-white py-8 sm:py-10 md:py-12 px-4 sm:px-6 shadow-2xl">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-6 mb-6">
-            <div className="bg-white p-4 rounded-full shadow-xl">
-              <Shield className="w-16 h-16 text-red-600" />
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 mb-4 sm:mb-6">
+            <div className="bg-white p-3 sm:p-4 rounded-full shadow-xl">
+              <Shield className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 text-red-600" />
             </div>
-            <div>
-              <h1 className="text-5xl mb-2">{club.club_name}</h1>
-              <div className="flex items-center gap-4 text-white/90">
+            <div className="flex-1">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl mb-2">
+                {club.club_name}
+              </h1>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm sm:text-base text-white/90">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
                   <span>
@@ -83,60 +95,51 @@ function ClubDetails() {
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="flex gap-3">
             <button
-              onClick={goToCreateMatch}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg flex items-center gap-2"
+              type="button"
+              onClick={() => navigate("/home")}
+              className="bg-white/15 hover:bg-white/20 border border-white/25 text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg flex items-center gap-2 transition-colors text-sm sm:text-base self-start sm:self-auto"
             >
-              <Calendar className="w-5 h-5" />
-              Create Match
+              <ArrowLeft className="w-4 h-4" />
+              Back to Dashboard
             </button>
-            <button
-  onClick={() => navigate(`/club/${club._id}/matches`)}
-  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg"
->
-  View Matches
-</button>
-
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 shadow-xl mb-12">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="bg-blue-600 p-3 rounded-lg">
-              <User className="w-6 h-6 text-white" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-12 mt-4 sm:mt-6">
+        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20 shadow-xl mb-8 sm:mb-12">
+          <div className="flex items-center gap-3 mb-3 sm:mb-4">
+            <div className="bg-blue-600 p-2 sm:p-3 rounded-lg">
+              <User className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
-            <h2 className="text-2xl text-white">Head Coach</h2>
+            <h2 className="text-xl sm:text-2xl text-white">Head Coach</h2>
           </div>
-          <p className="text-3xl text-white mb-2">
+          <p className="text-2xl sm:text-3xl text-white mb-2">
             {club.coach_id?.username || "No coach assigned"}
           </p>
-          <p className="text-white/60">Club Manager</p>
+          <p className="text-sm sm:text-base text-white/60">Club Manager</p>
         </div>
 
-        {team.length > 0 && (
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 shadow-xl mb-12">
-            <div className="flex items-center justify-between mb-8">
+        {team && team.length > 0 && (
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-8 border border-white/20 shadow-xl mb-8 sm:mb-12">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
               <div className="flex items-center gap-3">
-                <div className="bg-purple-600 p-3 rounded-lg">
-                  <Trophy className="w-6 h-6 text-white" />
+                <div className="bg-purple-600 p-2 sm:p-3 rounded-lg">
+                  <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <h2 className="text-3xl text-white">Teams</h2>
+                <h2 className="text-2xl sm:text-3xl text-white">Teams</h2>
               </div>
               <button
                 onClick={goToTeamForm}
-                className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg flex items-center gap-2"
+                className="bg-green-600 hover:bg-green-700 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg flex items-center justify-center sm:justify-start gap-2 transition-colors text-sm sm:text-base"
               >
-                <Plus className="w-5 h-5" />
+                <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
                 Create Team
               </button>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
               {team.map((t) => (
                 <TeamCard key={t._id} team={t} clubId={club._id} />
               ))}
@@ -144,30 +147,57 @@ function ClubDetails() {
           </div>
         )}
 
-        {clubPlayers.length > 0 && (
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 shadow-xl">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="bg-green-600 p-3 rounded-lg">
-                <Users className="w-6 h-6 text-white" />
+        {(!team || team.length === 0) && (
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-white/20 shadow-xl mb-8 sm:mb-12 text-center">
+            <div className="flex items-center justify-center gap-3 mb-3 sm:mb-4">
+              <div className="bg-purple-600 p-2 sm:p-3 rounded-lg">
+                <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <h2 className="text-3xl text-white">Club Members</h2>
+              <h2 className="text-2xl sm:text-3xl text-white">Teams</h2>
+            </div>
+            <p className="text-sm sm:text-base text-white/60 mb-4 sm:mb-6">
+              No teams created yet
+            </p>
+            <button
+              onClick={goToTeamForm}
+              className="bg-green-600 hover:bg-green-700 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg inline-flex items-center gap-2 transition-colors text-sm sm:text-base"
+            >
+              <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
+              Create Team
+            </button>
+          </div>
+        )}
+
+        {club.players && club.players.length > 0 && (
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-8 border border-white/20 shadow-xl">
+            <div className="flex items-center gap-3 mb-6 sm:mb-8">
+              <div className="bg-green-600 p-2 sm:p-3 rounded-lg">
+                <Users className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              </div>
+              <h2 className="text-2xl sm:text-3xl text-white">Squad</h2>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {clubPlayers.map((p) => (
-                <PlayerCard
-                  key={p.player_id._id}
-                  player={p.player_id}
-                  status={p.status}
-                />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+              {club.players.map((p) => (
+                <Link key={p.player_id._id} to={`/players/${p.player_id._id}`}>
+                  <PlayerCard player={p.player_id} status={p.status} />
+                </Link>
               ))}
             </div>
           </div>
         )}
 
-        {clubPlayers.length === 0 && (
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 shadow-xl text-center">
-            <p className="text-white/60">No approved players yet</p>
+        {(!club.players || club.players.length === 0) && (
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-white/20 shadow-xl text-center">
+            <div className="flex items-center justify-center gap-3 mb-3 sm:mb-4">
+              <div className="bg-green-600 p-2 sm:p-3 rounded-lg">
+                <Users className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              </div>
+              <h2 className="text-2xl sm:text-3xl text-white">Squad</h2>
+            </div>
+            <p className="text-sm sm:text-base text-white/60">
+              No players in the squad yet
+            </p>
           </div>
         )}
       </div>

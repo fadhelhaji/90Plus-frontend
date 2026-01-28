@@ -1,14 +1,36 @@
-import { CheckCircle, Clock, User, XCircle } from "lucide-react";
+import {
+  CheckCircle,
+  Clock,
+  User,
+  XCircle,
+  BadgeCheck,
+  Mail,
+} from "lucide-react";
 
 export function PlayerCard({ player, status }) {
   const getStatusInfo = (status) => {
-    switch (status?.toLowerCase()) {
+    const s = (status || "").toLowerCase();
+
+    switch (s) {
+      case "approved":
+        return { color: "bg-green-500", icon: BadgeCheck, text: "Club Player" };
+
+      case "invited":
+        return { color: "bg-yellow-500", icon: Mail, text: "Invited" };
+
       case "active":
         return { color: "bg-green-500", icon: CheckCircle, text: "Active" };
+
       case "inactive":
         return { color: "bg-gray-500", icon: XCircle, text: "Inactive" };
+
       case "pending":
         return { color: "bg-yellow-500", icon: Clock, text: "Pending" };
+
+      case "free_agent":
+      case "free":
+        return { color: "bg-blue-500", icon: User, text: "Free Agent" };
+
       default:
         return { color: "bg-blue-500", icon: User, text: status || "Unknown" };
     }
