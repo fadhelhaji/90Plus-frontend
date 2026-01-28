@@ -44,6 +44,10 @@ function ClubDetails() {
     navigate(`/club/${club._id}/teams/create`);
   };
 
+  const goToCreateMatch = () => {
+    navigate(`/club/${club._id}/games/create`);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
@@ -79,6 +83,23 @@ function ClubDetails() {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="flex gap-3">
+            <button
+              onClick={goToCreateMatch}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg flex items-center gap-2"
+            >
+              <Calendar className="w-5 h-5" />
+              Create Match
+            </button>
+            <button
+  onClick={() => navigate(`/club/${club._id}/matches`)}
+  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg"
+>
+  View Matches
+</button>
+
           </div>
         </div>
       </div>

@@ -14,6 +14,9 @@ import TeamForm from "./Components/Team/TeamForm";
 import SignInForm from "./Components/User/SignIn/SignInForm";
 import SignUpForm from "./Components/User/SignUp/SignUpForm";
 import { UserContext } from "./Contexts/UserContext";
+import CreateMatch from "./Components/Match/CreateMatch";
+import MatchDetails from "./Components/Match/MatchDetails";
+import MatchList from "./components/Match/MatchList";
 
 function App() {
   const { user } = useContext(UserContext);
@@ -33,6 +36,15 @@ function App() {
         <Route path="/players/market" element={<PlayersList />} />
         <Route path="/players/:id" element={<PlayersDetails />} />
         <Route path="/players/invites/:playerId" element={<PlayerInvites />} />
+        <Route path="/club/:clubId/games/create" element={<CreateMatch />} />
+        <Route path="/club/:clubId/matches/:gameId" element={<MatchDetails />} />
+        
+<Route
+  path="/club/:clubId/matches"
+  element={<MatchList />}
+/>
+
+
       </Routes>
     </>
   );

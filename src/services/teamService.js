@@ -8,15 +8,23 @@ const getAuthHeader = () => {
   };
 };
 
-export const getTeamDetails = (clubId, teamId) =>
-  axios.get(`${BASE_URL}/${clubId}/teams/${teamId}`, getAuthHeader());
+async function getTeamDetails(clubId, teamId) {
+  const response = await axios.get(
+    `${BASE_URL}/${clubId}/teams/${teamId}`,
+    getAuthHeader()
+  );
+  return response.data;
+}
 
-export const addPlayerToTeam = (clubId, teamId, playerId) =>
+export { getTeamDetails };
+
+export const addPlayerToTeam = (clubId, teamId, data) =>
   axios.post(
     `${BASE_URL}/${clubId}/teams/${teamId}/add-player`,
-    { playerId },
+    data,
     getAuthHeader(),
   );
+
 
 export const removePlayerFromTeam = (clubId, teamId, playerId) =>
   axios.post(
