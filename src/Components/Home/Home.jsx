@@ -49,7 +49,7 @@ function Home() {
 
             <div className="w-28 h-8 left-[168px] top-[250px] absolute bg-gray-200 rounded-md" />
 
-            <Link to="/club">
+            <Link to={`/club/${user.club_id}`}>
               <div className="left-[176px] top-[252px] absolute justify-start text-black text-xl font-normal font-['Jersey_25']">
                 Manage Club
               </div>

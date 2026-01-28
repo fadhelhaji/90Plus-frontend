@@ -12,7 +12,6 @@ const getAuthHeader = () => {
 async function index() {
   try {
     const response = await axios.get(`${BASE_URL}/market`);
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -32,7 +31,6 @@ async function show(id) {
 async function getInvitations(playerId) {
   try {
     const response = await axios.get(`${BASE_URL}/invites/${playerId}`);
-    console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);

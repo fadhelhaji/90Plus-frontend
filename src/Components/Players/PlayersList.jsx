@@ -8,7 +8,6 @@ function PlayersList() {
   async function fetchPlayers() {
     try {
       const data = await playerService.index();
-      console.log(data);
       setPlayers(data);
     } catch (error) {
       console.log(error);

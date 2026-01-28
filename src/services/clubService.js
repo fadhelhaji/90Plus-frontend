@@ -60,7 +60,6 @@ async function createTeam(clubId, formData) {
 async function indexTeam(clubId) {
   try {
     const response = await axios.get(`${BASE_URL}/${clubId}`, getAuthHeader());
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);
