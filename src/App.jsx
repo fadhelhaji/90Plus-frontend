@@ -42,6 +42,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             {isCoach && (
               <>
+                <Route path="/club/:id/edit" element={<ClubForm />} />
                 <Route path="/club" element={<ClubList />} />
                 <Route path="/club/create" element={<ClubForm />} />
                 <Route path="/club/:id" element={<ClubDetails />} />

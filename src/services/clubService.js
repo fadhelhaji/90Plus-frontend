@@ -108,6 +108,22 @@ async function rejectInvitation(clubId) {
   return response.data;
 }
 
+export async function deleteClub(clubId) {
+  const res = await axios.delete(`${BASE_URL}/${clubId}`, getAuthHeader());
+  return res.data;
+}
+
+async function update(clubId, formData) {
+  const response = await axios.put(
+    `${BASE_URL}/${clubId}`,
+    formData,
+    getAuthHeader(),
+  );
+  return response.data;
+}
+
+export { update };
+
 export {
   acceptInvitation,
   create,
@@ -117,6 +133,5 @@ export {
   invitePlayer,
   rejectInvitation,
   show,
-  showTeam
+  showTeam,
 };
-

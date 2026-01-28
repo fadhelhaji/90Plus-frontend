@@ -8,13 +8,19 @@ import {
   Calendar,
   Plus,
   ArrowLeft,
+  Trash2,
+  Pencil,
 } from "lucide-react";
 import * as clubService from "../../services/clubService";
 import { PlayerCard } from "./UI/PlayerCard";
 import { TeamCard } from "./UI/TeamCard";
+import { useContext } from "react";
+import { UserContext } from "../../Contexts/UserContext";
 
 function ClubDetails() {
   const { id: clubId } = useParams();
+  const { user, setUser } = useContext(UserContext);
+
   const navigate = useNavigate();
   const [club, setClub] = useState(null);
   const [team, setTeam] = useState([]);
@@ -56,6 +62,17 @@ function ClubDetails() {
     navigate(`/club/${clubId}/teams/create`);
   };
 
+  async function handleDelete() {
+    try {
+      await clubService.deleteClub(clubId);
+      setUser((prev) => (prev ? { ...prev, club_id: null } : prev));
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
+      alert(error?.response?.data?.error || "Failed to delete club");
+    }
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
@@ -82,6 +99,7 @@ function ClubDetails() {
             <div className="bg-white p-3 sm:p-4 rounded-full shadow-xl">
               <Shield className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 text-red-600" />
             </div>
+
             <div className="flex-1">
               <h1 className="text-3xl sm:text-4xl md:text-5xl mb-2">
                 {club.club_name}
@@ -95,14 +113,33 @@ function ClubDetails() {
                 </div>
               </div>
             </div>
-            <button
-              type="button"
-              onClick={() => navigate("/home")}
-              className="bg-white/15 hover:bg-white/20 border border-white/25 text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg flex items-center gap-2 transition-colors text-sm sm:text-base self-start sm:self-auto"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Dashboard
-            </button>
+
+            <div className="flex items-center gap-2 self-start sm:self-auto">
+              <button
+                type="button"
+                onClick={() => navigate("/home")}
+                className="bg-white/15 hover:bg-white/20 border border-white/25 text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg flex items-center gap-2 transition-colors text-sm sm:text-base"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back to Dashboard
+              </button>
+
+              <button
+                type="button"
+                onClick={handleDelete}
+                className="bg-red-600/90 hover:bg-red-700 border border-white/15 text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg flex items-center gap-2 transition-colors text-sm sm:text-base"
+              >
+                <Trash2 className="w-4 h-4" />
+                Delete Club
+              </button>
+              <button
+                onClick={() => navigate(`/club/${clubId}/edit`)}
+                className="bg-yellow-600 hover:bg-white/20 border border-white/25 text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg flex items-center gap-2 transition-colors text-sm sm:text-base"
+              >
+                <Pencil className="w-4 h-4 sm:w-5 sm:h-5" />
+                Edit Club
+              </button>
+            </div>
           </div>
         </div>
       </div>
