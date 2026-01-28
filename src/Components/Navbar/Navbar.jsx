@@ -6,7 +6,7 @@ const Navbar = () => {
   const { user, setUser } = useContext(UserContext);
   const location = useLocation();
   const navigate = useNavigate();
-
+  console.log(user);
   const path = location.pathname;
 
   const handleSignOut = () => {

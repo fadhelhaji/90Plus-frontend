@@ -89,4 +89,35 @@ async function invitePlayer(clubId, playerId) {
   return response.data;
 }
 
-export { create, createTeam, index, indexTeam, invitePlayer, show, showTeam };
+// ACCEPT invitation
+async function acceptInvitation(clubId) {
+  const response = await axios.post(
+    `${BASE_URL}/${clubId}/accept`,
+    {},
+    getAuthHeader(),
+  );
+  return response.data;
+}
+
+// REJECT invitation
+async function rejectInvitation(clubId) {
+  const response = await axios.post(
+    `${BASE_URL}/${clubId}/reject`,
+    {},
+    getAuthHeader(),
+  );
+  return response.data;
+}
+
+export {
+  acceptInvitation,
+  create,
+  createTeam,
+  index,
+  indexTeam,
+  invitePlayer,
+  rejectInvitation,
+  show,
+  showTeam
+};
+
