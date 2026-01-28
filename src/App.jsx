@@ -37,14 +37,11 @@ function App() {
         <Route path="/players/:id" element={<PlayersDetails />} />
         <Route path="/players/invites/:playerId" element={<PlayerInvites />} />
         <Route path="/club/:clubId/games/create" element={<CreateMatch />} />
-        <Route path="/club/:clubId/matches/:gameId" element={<MatchDetails />} />
-        
-<Route
-  path="/club/:clubId/matches"
-  element={<MatchList />}
-/>
-
-
+        <Route
+          path="/club/:clubId/matches/:gameId"
+          element={<MatchDetails />}
+        />
+        <Route path="/club/:clubId/matches" element={<MatchList />} />
       </Routes>
     </>
   );

@@ -24,3 +24,28 @@ export const ratePlayer = (clubId, gameId, playerId, data) =>
     data,
     getAuthHeader()
   );
+
+export const uploadMatchPhoto = (clubId, gameId, file) => {
+  const formData = new FormData();
+  formData.append("photo", file);
+
+  return axios.post(`${BASE_URL}/${clubId}/games/${gameId}/photos`, formData, {
+    ...getAuthHeader(),
+    headers: {
+      ...getAuthHeader().headers,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+export const deleteMatchPhoto = (clubId, gameId, photoId) =>
+  axios.delete(`${BASE_URL}/${clubId}/games/${gameId}/photos/${photoId}`, getAuthHeader());
+
+export const updatePhotoTags = (clubId, gameId, photoId, tagged_player_ids) =>
+  axios.put(
+    `${BASE_URL}/${clubId}/games/${gameId}/photos/${photoId}/tags`,
+    { tagged_player_ids },
+    getAuthHeader()
+  );
+
+
