@@ -117,7 +117,7 @@ N/A (Deployment pending)
 ## 🧠 Planning Materials
 
 - ERD (Clubs, Teams, Matches, Players)
-  <img src="/src/assets/Pictures/Planning Material/ERD/90Plus - ERD.png" alt="ERD">
+  <img src="/src/assets/Pictures/Planning Material/ERD/90PlusERD.png" alt="ERD">
 - Initial App Flow (Players Market Page)
   <img src="/src/assets/Pictures/Planning Material/App Flow/Initial App Flow (Players Market Page).png" alt="Inital App Flow">
 
