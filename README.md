@@ -66,7 +66,7 @@ For the frontend interface and more project details, visit https://github.com/fa
 
 90Plus was created to solve a problem we repeatedly faced when organizing football games.
 
-Whenever we planned a match, everything was scattered — messages in group chats, random notes, no proper record of who played, what the score was, or how players performed. Once the game was over, there was no history, no tracking, and no way to look back.
+Whenever we planned a match, everything was scattered, messages in group chats, random notes, no proper record of who played, what the score was, or how players performed. Once the game was over, there was no history, no tracking, and no way to look back.
 
 **90Plus** centralizes the entire football experience into one platform by providing:
 
